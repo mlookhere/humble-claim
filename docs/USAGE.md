@@ -20,3 +20,7 @@ npm start -- --execute
 ## Limitations to validate before real activation
 
 The source HTML ZIPs shared in the earlier conversation were not available during repository seeding. This prototype uses conservative DOM selectors for Humble key rows and Steam's product activation form; **do not assume live compatibility** until redacted sample HTML and one-key validation have been completed. Dynamic pagination, nonstandard key formats, bundles with multiple keys per row, and transient AJAX success/error rendering need fixture-based testing. No network request or activation has been performed in this environment.
+
+## Offline browser regression coverage
+
+CI installs Chromium headless shell and exercises synthetic Humble reveal and intercepted Steam activation forms. These tests make **no real Humble/Steam requests** and are not a substitute for checking the saved real-page HTML or doing a supervised one-key validation.
