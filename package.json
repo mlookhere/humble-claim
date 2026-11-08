@@ -1,0 +1,14 @@
+{
+  "name": "humble-claim",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/cli.mjs",
+    "test": "node --test && node --check src/cli.mjs && node --check src/humble.mjs && node --check src/steam.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.65.0"
+  }
+}
