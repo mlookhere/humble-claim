@@ -3,7 +3,7 @@ import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 import { resolve } from 'node:path';
 import { loadCheckpoint, saveCheckpoint } from './checkpoint.mjs';
-import { fingerprint, isVerifiedActivation, maskKey } from './core.mjs';
+import { fingerprint, isVerifiedActivation, redactKeys } from './core.mjs';
 import { expandList, HUMBLE_URL, revealKey, scanKeys } from './humble.mjs';
 import { activateOnSteam, STEAM_URL } from './steam.mjs';
 
@@ -15,8 +15,7 @@ if (args.some((arg) => !valid.has(arg))) {
 } else {
   await main().catch((error) => {
     // Browser exceptions sometimes include field values; never print secrets.
-    console.error('Stopped: ' + String(error?.message ?? error)
-      .replace(/\b[A-Z0-9]{5}(?:-[A-Z0-9]{5}){2}\b/gi, '[REDACTED]'));
+    console.error('Stopped: ' + redactKeys(error?.message ?? error));
     process.exitCode = 1;
   });
 }

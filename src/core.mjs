@@ -15,6 +15,10 @@ export function fingerprint(key) {
   return createHash('sha256').update(normalized[0]).digest('hex');
 }
 
+export function redactKeys(text) {
+  return String(text ?? '').replace(KEY_REGEX, '[REDACTED KEY]');
+}
+
 export function maskKey(key) {
   return '***-***-' + String(key).slice(-3).toUpperCase();
 }

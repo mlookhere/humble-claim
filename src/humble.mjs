@@ -1,4 +1,4 @@
-import { extractKeys } from './core.mjs';
+import { extractKeys, redactKeys } from './core.mjs';
 
 export const HUMBLE_URL = 'https://www.humblebundle.com/home/keys';
 export const CARD_SELECTOR = '.js-key-item, .key-redeemer, .key-item, [data-key-id]';
@@ -28,7 +28,7 @@ export async function scanKeys(page) {
           .test(button.innerText || button.value || button.getAttribute('aria-label') || ''));
         return {
           index,
-          title: title.slice(0, 160),
+          title: redactKeys(title).slice(0, 160),
           steam: /\bsteam\b/i.test(text),
           reveal,
           text,
